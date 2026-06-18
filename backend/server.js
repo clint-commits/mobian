@@ -125,7 +125,7 @@ app.get('/api/image', async (req, res) => {
 const PORT = process.env.PORT ?? 3001
 console.log('App setup complete, waiting for requests...')
 
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`API server running on port ${PORT}`)
 })
 
