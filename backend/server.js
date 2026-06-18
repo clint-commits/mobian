@@ -8,14 +8,7 @@ const app = express()
 app.use(cors({ origin: process.env.CORS_ORIGIN ?? '*' }))
 app.use(express.json())
 
-let anthropic
-try {
-  anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
-  console.log('Anthropic client initialized successfully')
-} catch (err) {
-  console.error('Failed to initialize Anthropic:', err)
-  process.exit(1)
-}
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 process.on('uncaughtException', (err) => {
   console.error('Uncaught exception — stack:', err?.stack ?? err)
