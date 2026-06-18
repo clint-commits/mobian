@@ -107,6 +107,7 @@ app.get('/api/image', async (req, res) => {
   }
 })
 
+const PORT = process.env.PORT ?? 3001
 const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`)
   console.log('Server is ready to accept connections')
