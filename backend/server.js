@@ -105,7 +105,7 @@ app.get('/api/image', async (req, res) => {
 })
 
 const PORT = process.env.PORT ?? 3001
-const server = app.listen(PORT, (0.0.0.0) => {
+const server = app.listen(PORT, () => {
   const ts = new Date().toISOString()
   console.log(`[${ts}] Server running on port ${PORT}`)
   console.log('Server address:', server.address())
