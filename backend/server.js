@@ -123,11 +123,6 @@ app.get('/api/image', async (req, res) => {
 })
 
 const PORT = process.env.PORT ?? 3001
-app.listen(PORT, () => {
-  console.log(`API server running on port ${PORT}`)
-  console.log('Server is ready to accept requests')
-})
-
 console.log('App setup complete, waiting for requests...')
 
 const server = app.listen(PORT, () => {
@@ -136,6 +131,7 @@ const server = app.listen(PORT, () => {
 
 server.on('error', (err) => {
   console.error('Server error:', err)
+  process.exit(1)
 })
 
 process.on('SIGTERM', () => {
