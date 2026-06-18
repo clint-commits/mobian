@@ -105,10 +105,10 @@ app.get('/api/image', async (req, res) => {
 })
 
 const PORT = process.env.PORT ?? 3001
-const server = app.listen(PORT, '0.0.0.0', () => {
+const server = app.listen(PORT, () => {
   const ts = new Date().toISOString()
   console.log(`[${ts}] Server running on port ${PORT}`)
-  console.log(`[${ts}] Bound to 0.0.0.0 — accepting connections on all interfaces`)
+  console.log('Server address:', server.address())
   console.log(`[${ts}] app.listen() callback complete — no blocking work scheduled after this point`)
 })
 
