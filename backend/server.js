@@ -107,5 +107,20 @@ app.get('/api/image', async (req, res) => {
   }
 })
 
-const PORT = process.env.PORT ?? 3001
-app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`))
+const server = app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`)
+  console.log('Server is ready to accept connections')
+})
+
+server.on('error', (err) => {
+  console.error('Server error:', err)
+  process.exit(1)
+})
+
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully')
+  server.close(() => {
+    console.log('Server closed')
+    process.exit(0)
+  })
+})
