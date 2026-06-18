@@ -11,18 +11,20 @@ app.use(express.json())
 let anthropic
 try {
   anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+  console.log('Anthropic client initialized successfully')
 } catch (err) {
   console.error('Failed to initialize Anthropic:', err)
   process.exit(1)
 }
 
 process.on('uncaughtException', (err) => {
-  console.error('Uncaught exception:', err)
+  console.error('Uncaught exception — stack:', err?.stack ?? err)
   process.exit(1)
 })
 
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled rejection:', reason)
+  console.error('Unhandled rejection — reason:', reason instanceof Error ? reason.stack : reason)
+  console.error('Unhandled rejection — promise:', promise)
   process.exit(1)
 })
 
@@ -111,6 +113,7 @@ const PORT = process.env.PORT ?? 3001
 const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`)
   console.log('Server is ready to accept connections')
+  console.log(`app.listen() callback complete — process will stay alive unless an error fires`)
 })
 
 server.on('error', (err) => {
