@@ -1,9 +1,15 @@
 console.log('Server starting...')
+console.log('Importing express...')
 import express from 'express'
+console.log('Importing cors...')
 import cors from 'cors'
+console.log('Importing Anthropic...')
 import Anthropic from '@anthropic-ai/sdk'
+console.log('Importing MCP client...')
 import { Client } from '@modelcontextprotocol/sdk/client/index.js'
+console.log('Importing MCP transport...')
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
+console.log('All imports successful')
 
 const app = express()
 app.use(cors({ origin: process.env.CORS_ORIGIN ?? '*' }))
