@@ -33,6 +33,8 @@ async function getMobianClient() {
 
 app.get('/', (req, res) => res.json({ status: 'ok' }))
 
+app.get('/health', (req, res) => res.json({ ok: true }))
+
 app.post('/api/claude', async (req, res) => {
   const { prompt } = req.body
   if (!prompt) return res.status(400).json({ error: 'prompt is required' })
@@ -104,9 +106,10 @@ app.get('/api/image', async (req, res) => {
 
 const PORT = process.env.PORT ?? 3001
 const server = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`)
-  console.log('Server is ready to accept connections')
-  console.log(`app.listen() callback complete — process will stay alive unless an error fires`)
+  const ts = new Date().toISOString()
+  console.log(`[${ts}] Server running on port ${PORT}`)
+  console.log(`[${ts}] Bound to 0.0.0.0 — accepting connections on all interfaces`)
+  console.log(`[${ts}] app.listen() callback complete — no blocking work scheduled after this point`)
 })
 
 server.on('error', (err) => {
